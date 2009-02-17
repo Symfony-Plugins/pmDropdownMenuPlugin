@@ -18,9 +18,9 @@ function dropdown_menu($config_file, $options = array())
 
   $items = sfYaml::load($config_file);
 
-  $html = tag("div", array("id" => "dropdown_menu"), false);
+  $html = tag("div", array("id" => "dropdown_menu"), true);
   $html .= content_tag("h1", isset($options["title"])?$options["title"]:__("Dropdown menu plugin"));
-  $html .= tag("div", array("id" => "menu"), false);
+  $html .= tag("div", array("id" => "menu"), true);
 
   $i = 0;
   foreach ($items as $item) {
@@ -50,9 +50,9 @@ function dropdown_menu($config_file, $options = array())
 
     if ($display) {
       if (isset($item["dropdown"])) {
-        $html .= tag("div", array("id" => "panel$i", "class" => "panel", "style" => "display: none;"), false);
+        $html .= tag("div", array("id" => "panel$i", "class" => "panel", "style" => "display: none;"), true);
 
-        $html .= tag("ul", null, false);
+        $html .= tag("ul", null, true);
         foreach ($item["dropdown"] as $ditem) {
           $display = true;
           if (isset($ditem["credentials"]))
@@ -64,15 +64,15 @@ function dropdown_menu($config_file, $options = array())
             $html .= content_tag("li", link_to(__($title), $url));
           }
         }
-        $html .= tag("/ul", null, false);
-        $html .= tag("/div", null, false);
+        $html .= tag("/ul", null, true);
+        $html .= tag("/div", null, true);
       }
     }
     $i++;
   }
 
-  $html .= tag("/div", null, false);
-  $html .= tag("/div", null, false);
+  $html .= tag("/div", null, true);
+  $html .= tag("/div", null, true);
 
   return $html;
 }
